@@ -1,8 +1,7 @@
 function getAccessToken() {
-  const rootEl = document.querySelector("#main");
-  const reactRoot = rootEl?._reactRootContainer?._internalRoot?.current;
-  const store = reactRoot?.memoizedState?.element?.props?.store;
-  const state = store?.getState();
+  const state = Object.entries(document.querySelector("#main"))
+    .find(([k, v]) => k.startsWith("__reactContainer$"))[1]
+    .memoizedState.element.props.store.getState();
   return state?.session?.accessToken;
 }
 
